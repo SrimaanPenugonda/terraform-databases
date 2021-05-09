@@ -7,13 +7,13 @@ resource "aws_db_subnet_group" "mysqldb" {
 }
 
 resource "aws_rds_cluster_parameter_group" "mysqldb" {
-  name   = "mysql-cluster-pg-${var.ENV}"
+  name   = "mysqldb-cluster-pg-${var.ENV}"
   family = "aurora-mysql5.7"
   description = "RDS default cluster parameter group"
 }
 
 resource "aws_rds_cluster" "mysqldb" {
-  cluster_identifier              = "mysql-${var.ENV}"
+  cluster_identifier              = "mysqldb-${var.ENV}"
   engine                          = "aurora-mysql"
   engine_version                  = "5.7.mysql_aurora.2.03.2"
   db_subnet_group_name            = aws_db_subnet_group.mysqldb.name
@@ -28,7 +28,7 @@ resource "aws_rds_cluster" "mysqldb" {
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = 1
-  identifier         = "mysql-${var.ENV}-${count.index}"
+  identifier         = "mysqldb-${var.ENV}-${count.index}"
   cluster_identifier = aws_rds_cluster.mysqldb.id
   instance_class     = "db.t3.small"
   engine             = aws_rds_cluster.mysqldb.engine
@@ -37,8 +37,8 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 
 
 resource "aws_security_group" "allow_mysqldb" {
-  name        = "allow-mysql-${var.ENV}"
-  description = "allow-mysql-${var.ENV}"
+  name        = "allow-mysqldb-${var.ENV}"
+  description = "allow-mysqldb-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
   ingress {
     description = "SSH"
@@ -56,6 +56,6 @@ resource "aws_security_group" "allow_mysqldb" {
   }
 
   tags = {
-    Name = "allow-mysql-${var.ENV}"
+    Name = "allow-mysqldb-${var.ENV}"
   }
 }
