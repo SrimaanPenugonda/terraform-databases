@@ -4,4 +4,20 @@ S40: Create DB 1:06:00
     - mongodb - document db - but cant use with out authentication
        so using server and setup mongodb
     - rabbitmq - Amazon MQ
+- crate a repo terraform-databases
+    - rds.tf mysql db
+      - create a subnet group
+        from vpc state file - data.tf
+        private_subnets
+        name - mysql
+      - create parameter grp
+        family - mysql5.7
+      - create cluster grp
+        its just group of instances
+         - aurora-mysql - customized version of mysql
+         -database_name - "default-db"
+         username.pwd from secret manager
+         secret manager - add in data.tf
+         add jsondecode- MYSQL_USER,MYSQL_PASS
+         db_cluster_paramter grp name
 
