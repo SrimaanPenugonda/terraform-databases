@@ -23,7 +23,7 @@ resource "aws_rds_cluster" "mysqldb" {
   backup_retention_period         = 5
   preferred_backup_window         = "07:00-09:00"
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.mysqldb.name
-  vpc_security_group_ids          = [aws_security_group.allow_mysql.id]
+  vpc_security_group_ids          = [aws_security_group.allow_mysqldb.id]
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -36,7 +36,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 }
 
 
-resource "aws_security_group" "allow_mysql" {
+resource "aws_security_group" "allow_mysqldb" {
   name        = "allow-mysql-${var.ENV}"
   description = "allow-mysql-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
