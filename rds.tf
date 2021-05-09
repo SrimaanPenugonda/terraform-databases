@@ -6,7 +6,6 @@ resource "aws_db_subnet_group" "mysql" {
   }
 }
 
-
 resource "aws_rds_cluster_parameter_group" "mysql" {
   name   = "mysql-cluster-pg-${var.ENV}"
   family = "aurora-mysql5.7"
@@ -24,6 +23,7 @@ resource "aws_rds_cluster" "mysql" {
   backup_retention_period         = 5
   preferred_backup_window         = "07:00-09:00"
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.mysql.name
+  vpc_security_group_ids          = aws_security_group.allow_mysql.id
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -33,4 +33,29 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = "db.t3.small"
   engine             = aws_rds_cluster.mysql.engine
   engine_version     = aws_rds_cluster.mysql.engine_version
+}
+
+
+resource "aws_security_group" "allow_mysql" {
+  name        = "allow-mysql-${var.ENV}"
+  description = "allow-mysql-${var.ENV}"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  ingress {
+    description = "SSH"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR,data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow-mysql-${var.ENV}"
+  }
 }

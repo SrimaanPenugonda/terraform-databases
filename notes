@@ -15,9 +15,12 @@ S40: Create DB 1:06:00
       - create cluster grp
         its just group of instances
          - aurora-mysql - customized version of mysql
-         -database_name - "default-db"
+         -database_name - "defaultdb"
          username.pwd from secret manager
          secret manager - add in data.tf
          add jsondecode- MYSQL_USER,MYSQL_PASS
          db_cluster_paramter grp name
+     - create cluster instance  - "db.t3.small"
+        create a securty grp to connect to this instance
+           subnet will be both default vpc(workstation der) and roboshop vpc
 
