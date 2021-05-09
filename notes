@@ -1,0 +1,7 @@
+S40: Create DB 1:06:00
+    - RDS - mysql of aws service
+    - reddis - Elastic Cache
+    - mongodb - document db - but cant use with out authentication
+       so using server and setup mongodb
+    - rabbitmq - Amazon MQ
+
