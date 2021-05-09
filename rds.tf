@@ -23,7 +23,7 @@ resource "aws_rds_cluster" "mysql" {
   backup_retention_period         = 5
   preferred_backup_window         = "07:00-09:00"
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.mysql.name
-  vpc_security_group_ids          = aws_security_group.allow_mysql.id
+  vpc_security_group_ids          = [aws_security_group.allow_mysql.id]
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
