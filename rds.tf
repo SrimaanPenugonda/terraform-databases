@@ -1,5 +1,5 @@
 resource "aws_db_subnet_group" "mysql" {
-  name       = "Mysql"
+  name       = "mysql"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS
   tags       = {
     name     = "Mysql DB subnet grp"
