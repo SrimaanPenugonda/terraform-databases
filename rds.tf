@@ -63,9 +63,10 @@ resource "aws_security_group" "allow_mysql" {
 resource "null_resource" "mysql-schema" {
   provisioner "local-exec" {
     command = <<EOF
+    rm -rf rs-mysql
     git clone https://github.com/SrimaanPenugonda/rs-mysql.git
     cd rs-mysql
-    mysql -h ${aws_rds_cluster.mysql.endpoint} -u ${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_USER"]} -p${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_PASS"]} <shipping.sql
-EOF
+    mysql -h ${aws_rds_cluster.mysql.endpoint} -u${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_USER"]} -p${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_PASS"]} <shipping.sql
+  EOF
   }
 }
