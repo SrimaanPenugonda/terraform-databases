@@ -59,3 +59,13 @@ resource "aws_security_group" "allow_mysqldb" {
     Name = "allow-mysqldb-${var.ENV}"
   }
 }
+
+resource "null_resource" "mysql-schema" {
+  provisioner "local-exec" {
+    command = <<EOF
+    git clone https://github.com/SrimaanPenugonda/rs-mysql.git
+    cd rs-mysql
+    mysql -h ${aws_rds_cluster.mysqldb.endpoint} -u ${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_USER"]} -p${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["MYSQL_PASS"]} <shipping.sql
+EOF
+  }
+}
