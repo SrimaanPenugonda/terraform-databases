@@ -1,9 +1,6 @@
 resource "aws_elasticache_subnet_group" "redis" {
   name       = "redis-${var.ENV}"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS
-  tags       = {
-    name     = "Redis DB subnet grp"
-  }
 }
 
 resource "aws_elasticache_parameter_group" "redis" {
