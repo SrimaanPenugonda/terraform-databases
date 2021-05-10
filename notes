@@ -24,3 +24,9 @@ S40: Create DB 1:06:00
         create a securty grp to connect to this instance
            subnet will be both default vpc(workstation der) and roboshop vpc
 
+     - now load the schema shipping.sql by logging to that mysql - use null resource localexec
+
+- Reddis Elastic cache:
+
+
+
