@@ -51,5 +51,5 @@ resource "aws_route53_record" "redis" {
   type        = "CNAME"
   zone_id     = data.terraform_remote_state.vpc.outputs.ZONE_ID
   ttl         = "1000"
-  records     = [aws_elasticache_cluster.redis.cache_nodes[0].address] //endpoint wont be der.. and cache node will have id, address, port and availability_zone information
+  records     = [aws_elasticache_cluster.redis.cache_nodes[0].address] //endpoint wont be der..so using cache nodes... and cache node will have id, address, port and availability_zone information
 }

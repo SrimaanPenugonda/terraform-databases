@@ -41,6 +41,8 @@ add null resources.. and run ansible role for each
 S42:
 1.Create DNS records for db's
     resource aws_route53_record
+    zone id from terraform vpc
+
 
 
 
