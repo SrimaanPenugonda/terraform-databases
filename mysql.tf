@@ -72,7 +72,7 @@ resource "null_resource" "mysql-schema" {
 }
 
 resource "aws_route53_record" "mysql" {
-  name    = "mysql-${var.ENV}.devopssri.ml"
+  name    = "mysql-${var.ENV}"
   type    = "CNAME"
   ttl     = "1000"
   zone_id = data.terraform_remote_state.vpc.outputs.ZONE_ID
