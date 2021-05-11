@@ -29,6 +29,17 @@ S41:
      - now load the schema shipping.sql by logging to that mysql - use null resource localexec
 
 - Reddis Elastic cache:
+same like mysql create subnet grp,paramater grp and cluster
+security grp,
+no need of instance
+
+mongo and rabbitmq - no amazon services
+so create an instance using ami
+and create security grp
+add null resources.. and run ansible role for each
+
+S42:
+
 
 
 
