@@ -18,6 +18,7 @@ resource "aws_elasticache_cluster" "redis" {
   engine_version       = "5.0.5"
   port                 = 6379
   subnet_group_name    = aws_elasticache_subnet_group.redis.name
+  security_group_ids   = [aws_security_group.allow_redis.id]
 }
 resource "aws_security_group" "allow_redis" {
   name        = "allow-redis-${var.ENV}"
@@ -27,13 +28,6 @@ resource "aws_security_group" "allow_redis" {
     description = "SSH"
     from_port   = 6379
     to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR] //no schema to load so no need to connect workstation instance,no need of default voc cidr
-  }
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR] //no schema to load so no need to connect workstation instance,no need of default voc cidr
   }
