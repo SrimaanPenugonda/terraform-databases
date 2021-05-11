@@ -48,7 +48,7 @@ resource "null_resource" "rabbitmq-schema" {
     }
     inline        =[
       "sudo yum install ansible -y",
-      "ansible-pull -i localhost, -U https://github.com/SrimaanPenugonda/Ansible.git roboshop-project/roboshop.yml -e ENV=${var.ENV} -e component=rabbitmq -e PAT=${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["PAT"]} -t rabbitmq "
+      "ansible-pull -i localhost, -U https://github.com/SrimaanPenugonda/Ansible.git roboshop-project/roboshop.yml -e ENV=${var.ENV} -e component=rabbitmq -e PAT=${jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["PAT"]} -t rabbitmq"
     ]
   }
 }
