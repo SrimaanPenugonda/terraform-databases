@@ -21,9 +21,9 @@ resource "aws_elasticache_cluster" "redis" {
   security_group_ids   = [aws_security_group.allow_redis.id]
 }
 resource "aws_security_group" "allow_redis" {
-  name        = "allow-redis-${var.ENV}"
-  description = "allow-redis-${var.ENV}"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  name          = "allow-redis-${var.ENV}"
+  description   = "allow-redis-${var.ENV}"
+  vpc_id        = data.terraform_remote_state.vpc.outputs.VPC_ID
   ingress {
     description = "SSH"
     from_port   = 6379
@@ -37,7 +37,7 @@ resource "aws_security_group" "allow_redis" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  tags = {
-    Name = "allow-redis-${var.ENV}"
+  tags          = {
+    Name        = "allow-redis-${var.ENV}"
   }
 }

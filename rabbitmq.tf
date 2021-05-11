@@ -10,9 +10,9 @@ resource "aws_instance" "rabbitmq" {
 }
 
 resource "aws_security_group" "allow_rabbitmq" {
-  name        = "allow-rabbitmq-${var.ENV}"
-  description = "allow-rabbitmq-${var.ENV}"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  name          = "allow-rabbitmq-${var.ENV}"
+  description   = "allow-rabbitmq-${var.ENV}"
+  vpc_id        = data.terraform_remote_state.vpc.outputs.VPC_ID
   ingress {
     description = "SSH"
     from_port   = 5672
@@ -34,8 +34,8 @@ resource "aws_security_group" "allow_rabbitmq" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "allow-rabbitmq-${var.ENV}"
+  tags          = {
+    Name        = "allow-rabbitmq-${var.ENV}"
   }
 }
 

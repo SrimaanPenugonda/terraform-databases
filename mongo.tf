@@ -10,9 +10,9 @@ resource "aws_instance" "mongo" {
 }
 
 resource "aws_security_group" "allow_mongo" {
-  name        = "allow-mongo-${var.ENV}"
-  description = "allow-mongo-${var.ENV}"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  name          = "allow-mongo-${var.ENV}"
+  description   = "allow-mongo-${var.ENV}"
+  vpc_id        = data.terraform_remote_state.vpc.outputs.VPC_ID
   ingress {
     description = "SSH"
     from_port   = 27017
@@ -34,8 +34,8 @@ resource "aws_security_group" "allow_mongo" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "allow-mongo-${var.ENV}"
+  tags        = {
+    Name      = "allow-mongo-${var.ENV}"
   }
 }
 
@@ -54,9 +54,9 @@ resource "null_resource" "mongo-schema" {
 }
 
 resource "aws_route53_record" "mongo" {
-  name    = "mongo-${var.ENV}"
-  type    = "A"
-  ttl     = "1000"
-  zone_id = data.terraform_remote_state.vpc.outputs.ZONE_ID
-  records = [aws_instance.mongo.private_ip]
+  name          = "mongo-${var.ENV}"
+  type          = "A"
+  ttl           = "1000"
+  zone_id       = data.terraform_remote_state.vpc.outputs.ZONE_ID
+  records       = [aws_instance.mongo.private_ip]
 }

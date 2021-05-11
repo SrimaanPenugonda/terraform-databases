@@ -37,9 +37,9 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 
 
 resource "aws_security_group" "allow_mysql" {
-  name        = "allow-mysql-${var.ENV}"
-  description = "allow-mysql-${var.ENV}"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  name          = "allow-mysql-${var.ENV}"
+  description   = "allow-mysql-${var.ENV}"
+  vpc_id        = data.terraform_remote_state.vpc.outputs.VPC_ID
   ingress {
     description = "SSH"
     from_port   = 3306
@@ -55,14 +55,14 @@ resource "aws_security_group" "allow_mysql" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "allow-mysql-${var.ENV}"
+  tags          = {
+    Name        = "allow-mysql-${var.ENV}"
   }
 }
 
 resource "null_resource" "mysql-schema" {
   provisioner "local-exec" {
-    command = <<EOF
+    command     = <<EOF
     rm -rf rs-mysql
     git clone https://github.com/SrimaanPenugonda/rs-mysql.git
     cd rs-mysql
@@ -72,9 +72,9 @@ resource "null_resource" "mysql-schema" {
 }
 
 resource "aws_route53_record" "mysql" {
-  name    = "mysql-${var.ENV}"
-  type    = "CNAME"
-  ttl     = "1000"
-  zone_id = data.terraform_remote_state.vpc.outputs.ZONE_ID
-  records = [aws_rds_cluster.mysql.endpoint]
+  name          = "mysql-${var.ENV}"
+  type          = "CNAME"
+  ttl           = "1000"
+  zone_id       = data.terraform_remote_state.vpc.outputs.ZONE_ID
+  records       = [aws_rds_cluster.mysql.endpoint]
 }
