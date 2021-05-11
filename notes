@@ -1,10 +1,12 @@
 S40: Create DB 1:06:00
     - RDS - mysql of aws service
-    - reddis - Elastic Cache
+    - redis - Elastic Cache
     - mongodb - document db - but cant use with out authentication
        so using server and setup mongodb
     - rabbitmq - Amazon MQ
+S41:
 - crate a repo terraform-databases
+    Create A subnet grp and parameter grp.. these are mandit for any db
     - rds.tf mysql db
       - create a subnet group
         from vpc state file - data.tf
@@ -21,7 +23,7 @@ S40: Create DB 1:06:00
          add jsondecode- MYSQL_USER,MYSQL_PASS
          db_cluster_paramter grp name
      - create cluster instance  - "db.t3.small"
-        create a securty grp to connect to this instance
+        create a security grp to connect to this instance
            subnet will be both default vpc(workstation der) and roboshop vpc
 
      - now load the schema shipping.sql by logging to that mysql - use null resource localexec
