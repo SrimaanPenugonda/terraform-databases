@@ -4,8 +4,8 @@ resource "aws_elasticache_subnet_group" "redis" {
 }
 
 resource "aws_elasticache_parameter_group" "redis" {
-  name   = "redis-cluster-pg-${var.ENV}"
-  family = "redis5.0"
+  name        = "redis-cluster-pg-${var.ENV}"
+  family      = "redis5.0"
   description = "Redis default cluster parameter group"
 }
 
