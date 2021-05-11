@@ -39,7 +39,7 @@ resource "aws_security_group" "allow_rabbitmq" {
   }
 }
 
-resource "null_resource" "rabbitmq-schema" {
+resource "null_resource" "rabbitmqdb-schema" {
   provisioner "remote-exec" {
     connection {
       host        = aws_instance.rabbitmq.private_ip

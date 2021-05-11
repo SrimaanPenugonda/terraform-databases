@@ -39,7 +39,7 @@ resource "aws_security_group" "allow_mongo" {
   }
 }
 
-resource "null_resource" "mongo-schema" {
+resource "null_resource" "mongodb-schema" {
   provisioner "remote-exec" {
     connection {
       host        = aws_instance.mongo.private_ip
