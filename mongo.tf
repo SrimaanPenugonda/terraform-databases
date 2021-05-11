@@ -4,6 +4,9 @@ resource "aws_instance" "mongo" {
   vpc_security_group_ids  = [aws_security_group.allow_mongo.id]
   key_name                = "devops"
   subnet_id               = data.terraform_remote_state.vpc.PRIVATE_SUBNETS
+  tags                    = {
+        Name              = "mongo-dev"
+  }
 }
 
 resource "aws_security_group" "allow_mongo" {
