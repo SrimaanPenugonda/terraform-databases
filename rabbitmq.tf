@@ -5,7 +5,7 @@ resource "aws_instance" "rabbitmq" {
   key_name                = "devops"
   subnet_id               = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS[0]
   tags                    = {
-    Name              = "rabbitmq-${var.ENV}"
+    Name                  = "rabbitmq-${var.ENV}"
   }
 }
 
