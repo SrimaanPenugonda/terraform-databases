@@ -31,14 +31,12 @@ resource "aws_security_group" "allow_redis" {
     protocol    = "tcp"
     cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR] //no schema to load so no need to connect workstation instance,no need of default voc cidr
   }
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags = {
     Name = "allow-redis-${var.ENV}"
   }
