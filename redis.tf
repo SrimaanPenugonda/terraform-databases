@@ -10,7 +10,7 @@ resource "aws_elasticache_parameter_group" "redis" {
 }
 
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "redis-example"
+  cluster_id           = "redis-${var.ENV}"
   engine               = "redis"
   node_type            = "cache.t3.small"
   num_cache_nodes      = 1
