@@ -64,7 +64,7 @@ resource "aws_security_group" "allow_mysql" {
 resource "null_resource" "mysql-schema" {
   provisioner "local-exec" {
     command     = <<EOF
-    sleep 60
+    sleep 600
     rm -rf rs-mysql
     git clone https://github.com/SrimaanPenugonda/rs-mysql.git
     cd rs-mysql
