@@ -1,9 +1,9 @@
-resource "aws_elasticache_subnet_group" "redis" {
+resource "aws_elasticache_subnet_group" "redis" { //Then ElastiCache uses that cache subnet group to assign IP addresses within that subnet to each cache node in the cluster.
   name       = "redis-${var.ENV}"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS
 }
 
-resource "aws_elasticache_parameter_group" "redis" {
+resource "aws_elasticache_parameter_group" "redis" { // If you do not specify a parameter group for your Redis cluster, then a default parameter group appropriate to your engine version will be used. You can't change the values of any parameters in the default parameter group.
   name        = "redis-cluster-pg-${var.ENV}"
   family      = "redis5.0"
   description = "Redis default cluster parameter group"
